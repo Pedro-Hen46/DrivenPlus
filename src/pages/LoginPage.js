@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../images/LogoDriven.png";
 import { Grid } from "react-loader-spinner";
@@ -97,7 +97,7 @@ const Container = styled.div`
     color: white;
 
     font-family: "Roboto";
-    font-weight: 400;
+    font-weight: 500;
     font-size: large;
 
     :hover {
