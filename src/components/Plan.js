@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 export default function Plan({ data }) {
   console.log(data);
+  
+  
   return (
     <ContainerPlan>
       <img src={data.image} alt="Logo do plano" />
-      <h3>R$ {data.price} </h3>
+      <h3>R$ {data.price !== undefined ? (data.price).replace(".",",") : ''} </h3>
     </ContainerPlan>
   );
 }
