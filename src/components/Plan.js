@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useUserLogged } from "../contexts/UserLoggedProvider";
+
 export default function Plan({ data }) {
   
   return (

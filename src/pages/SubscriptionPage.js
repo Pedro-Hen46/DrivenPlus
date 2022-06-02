@@ -10,9 +10,10 @@ import { Grid } from "react-loader-spinner";
 export default function SubscriptionPage() {
 
   const [planFromApi, setPlanFromApi] = useState([{}]);
-  const { saveDataUser } = useUserLogged();
   const [loading, setLoading] = useState(false);
 
+  const { saveDataUser } = useUserLogged();
+  
   useEffect(() => {
     
     const config = {
@@ -29,7 +30,6 @@ export default function SubscriptionPage() {
     promise.then((response) => {
       setLoading(false);
       setPlanFromApi(response.data);
-      
     });
     promise.catch((error) => {
       console.log(error);

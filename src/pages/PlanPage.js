@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useUserLogged } from "../contexts/UserLoggedProvider";
+import { useUserData } from "../contexts/ContextUserData";
 import styled from "styled-components";
 import Back from "../images/back.png";
 import Close from "../images/close.png";
@@ -9,13 +10,17 @@ import Close from "../images/close.png";
 import Money from "../images/money.png";
 import Report from "../images/report.png";
 
-export default function PlanPage({ setData }) {
+export default function PlanPage() {
   const navigate = useNavigate();
 
   const [dataPlan, setDataPlan] = useState({});
   const [assiner, setAssiner] = useState(false);
 
   const { idPlan } = useParams();
+  const { addInfoOnUser } = useUserData();
+  
+
+  // const { saveDataUserLogged } = useUserLogged(); //Funcao para Armazenar dados
   const { saveDataUser } = useUserLogged();
 
   //Controle de dados do Input
@@ -30,22 +35,16 @@ export default function PlanPage({ setData }) {
         Authorization: `Bearer ${saveDataUser.token}`,
       },
     };
-
     const promise = axios.get(
-      `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships/${idPlan}`,
-      config
-    );
+      `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships/${idPlan}`, config);
 
     promise.then((response) => {
-      setDataPlan(response.data);
+      setDataPlan(response.data)
     });
-
     promise.catch((error) =>
-      alert("Deu um erro ao acessar por favor tente novamente: ", error)
+      console.log(error)
     );
-  }, [saveDataUser.token, idPlan]);
-
-  //   console.log(dataPlan);
+  }, []);
 
   function SendPlanAssinerToApi() {
     if (
@@ -62,22 +61,20 @@ export default function PlanPage({ setData }) {
         securityNumber: securityNumber,
         expirationDate: expirationDate,
       };
-      console.log(userPayment);
       const config = {
         headers: {
           Authorization: `Bearer ${saveDataUser.token}`,
         },
       };
-
       const promise = axios.post(
         "https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions",
         userPayment,
         config
       );
 
+      
       promise.then((response) => {
-        console.log(response.data);
-        setData(response.data);
+        addInfoOnUser(response.data);
         alert("Parabens seu pagamento foi feito com sucesso!");
         navigate("/home");
       });
@@ -111,7 +108,7 @@ export default function PlanPage({ setData }) {
               {index + 1}. {perks.title}{" "}
             </h3>
           ))
-        : console.log("Estou carregando o map")}
+        : ""}
       <div>
         <img src={Money} alt="Logo preço" />
         <h3>Preço:</h3> <p></p>

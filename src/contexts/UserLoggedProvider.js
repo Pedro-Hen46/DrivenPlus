@@ -12,6 +12,7 @@ export function UserLoggedProvider({ children }) {
     return {};
   });
 
+ 
   function saveDataUserLogged(data) {
     setDataStorage(data);
     localStorage.setItem("@dataUser", JSON.stringify(data));

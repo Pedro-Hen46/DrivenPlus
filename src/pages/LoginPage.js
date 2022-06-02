@@ -6,9 +6,11 @@ import Logo from "../images/LogoDriven.png";
 import { Grid } from "react-loader-spinner";
 
 import { useUserLogged } from "../contexts/UserLoggedProvider";
+import { useUserData } from "../contexts/ContextUserData";
 
 export default function LoginPage() {
   const { saveDataUserLogged } = useUserLogged();
+  const {setInfoUser} = useUserData();
 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -29,12 +31,14 @@ export default function LoginPage() {
 
         promise.then( (response) => {
           saveDataUserLogged(response.data);
+          setInfoUser(response.data);
             if (response.data.membership === null){
                 navigate("/subscriptions")
             } else navigate("/home")
         })
         promise.catch( (error) => {
             alert("Usuario ou senha invalidos, por favor tente novamente, se não tiver cadastro crie um agora mesmo.")
+            setLoading(false);
         })
         // promise.finally(setLoading(false)); // Quando terminar qualquer processo setar o loading como false novamente.
     } else alert("Por favor entre com seus dados para logar");
