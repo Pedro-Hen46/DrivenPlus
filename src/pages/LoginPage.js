@@ -46,7 +46,12 @@ export default function LoginPage() {
         setSending(false);
       });
       // promise.finally(setLoading(false)); // Quando terminar qualquer processo setar o loading como false novamente.
-    } else alert("Por favor entre com seus dados para logar");
+    } else {
+      alert("Por favor entre com seus dados para logar");
+      setLoading(false);
+      setSending(false);
+    }
+
   }
 
   return (
