@@ -132,8 +132,11 @@ const ButtonsHomeContainer = styled.div`
 
 const Header = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  margin-top: 8%;
+  width: 100%;
+  
   img {
     width: 100px;
     height: 100px;
@@ -150,13 +153,13 @@ const Header = styled.div`
 
 const ContainerHome = styled.div`
   display: flex;
+  width: 100%;
+  height: 100vh;
   flex-direction: column;
-
-  padding: 3rem;
+  align-items: center;
 
   h1 {
     margin-top: 30px;
-    margin-left: 20%;
     color: white;
     font-family: "Roboto";
     font-size: 28px;

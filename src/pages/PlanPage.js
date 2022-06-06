@@ -9,18 +9,17 @@ import Close from "../images/close.png";
 
 import Money from "../images/money.png";
 import Report from "../images/report.png";
+import { Grid } from "react-loader-spinner";
 
 export default function PlanPage() {
   const navigate = useNavigate();
 
   const [dataPlan, setDataPlan] = useState({});
   const [assiner, setAssiner] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { idPlan } = useParams();
   const { addInfoOnUser } = useUserData();
-  
-
-  // const { saveDataUserLogged } = useUserLogged(); //Funcao para Armazenar dados
   const { saveDataUser } = useUserLogged();
 
   //Controle de dados do Input
@@ -36,14 +35,18 @@ export default function PlanPage() {
       },
     };
     const promise = axios.get(
-      `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships/${idPlan}`, config);
-
-    promise.then((response) => {
-      setDataPlan(response.data)
-    });
-    promise.catch((error) =>
-      console.log(error)
+      `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships/${idPlan}`,
+      config
     );
+    setLoading(true);
+    promise.then((response) => {
+      setDataPlan(response.data);
+      setLoading(false);
+    });
+    promise.catch((error) => {
+      console.log(error);
+      setLoading(false);
+    });
   }, []);
 
   function SendPlanAssinerToApi() {
@@ -72,10 +75,8 @@ export default function PlanPage() {
         config
       );
 
-      
       promise.then((response) => {
         addInfoOnUser(response.data);
-        alert("Parabens seu pagamento foi feito com sucesso!");
         navigate("/home");
       });
       promise.catch((error) => {
@@ -88,88 +89,129 @@ export default function PlanPage() {
   }
 
   return (
-    <ContainerPlan>
-      <BackArrow>
-        <img
-          onClick={() => navigate("/subscriptions")}
-          src={Back}
-          alt="Voltar a tela"
-        />
-      </BackArrow>
-      <img src={dataPlan.image} alt="Logo do Plano selecionado" />
-      <h2>{dataPlan.name}</h2>
-      <div>
-        <img src={Report} alt="Benefícios" />
-        <h3>Benefícios:</h3>
-      </div>
-      {dataPlan.perks !== undefined
-        ? dataPlan.perks.map((perks, index) => (
-            <h3 key={index}>
-              {index + 1}. {perks.title}{" "}
-            </h3>
-          ))
-        : ""}
-      <div>
-        <img src={Money} alt="Logo preço" />
-        <h3>Preço:</h3> <p></p>
-      </div>
-      <h3>
-        R${" "}
-        {dataPlan.perks !== undefined ? dataPlan.price.replace(".", ",") : ""}{" "}
-        cobrados mensalmente
-      </h3>
+    <>
+      {loading ? (
+        <Carregando>
+          <Grid width="200px" height="200px" color="#ff4791" />
+        </Carregando>
+      ) : (
+        <ContainerPlan>
+          {assiner ? (
+            <AssinarDiv>
+              <img
+                onClick={() => setAssiner(false)}
+                src={Close}
+                alt="Voltar para tela de Payment"
+              />
+              <div>
+                <h3>
+                  Tem certeza que deseja assinar o pacote {dataPlan.name} ? (R${" "}
+                  {dataPlan.perks !== undefined
+                    ? dataPlan.price.replace(".", ",")
+                    : ""}
+                  )
+                </h3>
+                <p>
+                  <button onClick={() => setAssiner(false)}>NÃO</button>
+                  <button onClick={() => SendPlanAssinerToApi()}>SIM</button>
+                </p>
+              </div>
+            </AssinarDiv>
+          ) : (
+            ""
+          )}
 
-      <input
-        onChange={(e) => setCardName(e.target.value)}
-        type="text"
-        placeholder="Nome impresso no cartão"
-      />
-      <input
-        onChange={(e) => setCardNumber(e.target.value)}
-        type="number"
-        placeholder="Digitos do cartão"
-      />
-      <div>
-        <input
-          onChange={(e) => setSecurityNumber(e.target.value)}
-          type="number"
-          placeholder="Código de segurança"
-        />
-        <input
-          onChange={(e) => setExpirationDate(e.target.value)}
-          type="date"
-          placeholder="Válidade"
-        />
-      </div>
-      <button onClick={() => setAssiner(true)}>ASSINAR</button>
+          <BackArrow>
+            <img
+              onClick={() => navigate("/subscriptions")}
+              src={Back}
+              alt="Voltar a tela"
+            />
+          </BackArrow>
+          <InfoDadesHeader>
+            <img src={dataPlan.image} alt="Logo do Plano selecionado" />
+            <h2>{dataPlan.name}</h2>
+          </InfoDadesHeader>
+          <div>
+            <img src={Report} alt="Benefícios" />
+            <h3>Benefícios:</h3>
+          </div>
+          {dataPlan.perks !== undefined
+            ? dataPlan.perks.map((perks, index) => (
+                <h3 key={index}>
+                  {index + 1}. {perks.title}{" "}
+                </h3>
+              ))
+            : ""}
+          <div>
+            <img src={Money} alt="Logo preço" />
+            <h3>Preço:</h3> <p></p>
+          </div>
+          <h3>
+            R${" "}
+            {dataPlan.perks !== undefined
+              ? dataPlan.price.replace(".", ",")
+              : ""}{" "}
+            cobrados mensalmente
+          </h3>
 
-      {assiner ? (
-        <AssinarDiv>
-          <img
-            onClick={() => setAssiner(false)}
-            src={Close}
-            alt="Voltar para tela de Payment"
+          <input
+            onChange={(e) => setCardName(e.target.value)}
+            type="text"
+            placeholder="Nome impresso no cartão"
+          />
+          <input
+            onChange={(e) => setCardNumber(e.target.value)}
+            type="number"
+            placeholder="Digitos do cartão"
           />
           <div>
-            <h3>
-              Tem certeza que deseja assinar o pacote {dataPlan.name} ? (R${" "}
-              {dataPlan.perks !== undefined
-                ? dataPlan.price.replace(".", ",")
-                : ""}
-              )
-            </h3>
-            <p>
-              <button onClick={() => setAssiner(false)}>NÃO</button>
-              <button onClick={() => SendPlanAssinerToApi()}>SIM</button>
-            </p>
+            <input
+              onChange={(e) => setSecurityNumber(e.target.value)}
+              type="number"
+              placeholder="Código de segurança"
+            />
+            <input
+              onChange={(e) => setExpirationDate(e.target.value)}
+              type="text"
+              placeholder="Válidade MM/AA"
+            />
           </div>
-        </AssinarDiv>
-      ) : (
-        ""
+          <button onClick={() => setAssiner(true)}>ASSINAR</button>
+        </ContainerPlan>
       )}
-    </ContainerPlan>
+    </>
   );
 }
+const InfoDadesHeader = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column !important;
+
+  img {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  h2 {
+    margin-top: 20px;
+    color: white;
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: 2rem;
+  }
+`;
+
+const Carregando = styled.div`
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const BackArrow = styled.div`
   position: fixed;
   top: 10px;
@@ -187,12 +229,13 @@ const BackArrow = styled.div`
 
 const AssinarDiv = styled.div`
   position: fixed;
+  top: 0;
+  z-index: 1 !important;
   width: 100%;
-  height: 200vh;
-  margin-top: -100px !important;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  justify-content: center;
+  padding: 4rem;
 
   img {
     width: 40px !important;
@@ -210,6 +253,7 @@ const AssinarDiv = styled.div`
   div {
     width: 400px !important;
     margin-left: -4rem !important;
+    margin-top: 5rem !important;
     padding: 2rem;
     height: 200px;
     border-radius: 5px;
@@ -250,6 +294,7 @@ const AssinarDiv = styled.div`
 const ContainerPlan = styled.div`
   padding: 3rem;
   display: flex;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
   input {
@@ -260,18 +305,8 @@ const ContainerPlan = styled.div`
     width: 100%;
   }
   img {
-    width: 60%;
-    margin-left: 6rem;
-  }
-
-  h2 {
-    margin-top: 20px;
-    color: white;
-    font-family: "Roboto";
-    font-weight: 700;
-    font-size: 36px;
-
-    margin-left: 4rem;
+    width: 200px;
+    margin-left: 30%;
   }
   div {
     width: 100%;

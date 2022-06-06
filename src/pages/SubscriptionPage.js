@@ -67,10 +67,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 3rem;
-
+  
   h1 {
     color: #ffffff;
     font-family: "Roboto";
-    font-size: 32px;
-  }
+    font-size: 28px;
+    }
+
 `;

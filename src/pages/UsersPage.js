@@ -1,22 +1,24 @@
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Back from "../images/back.png";
-import { useUserLogged } from "../contexts/UserLoggedProvider";
 import { useUserData } from "../contexts/ContextUserData";
+import { useUserLogged } from "../contexts/UserLoggedProvider";
+
 export default function UsersPage() {
   const navigate = useNavigate();
   const { idUser } = useParams();
 
   const { infoUser } = useUserData();
+  const { saveDataUser } = useUserLogged();
 
   return (
     <ContainerUsers>
       <BackArrow>
         <img onClick={() => navigate("/home")} src={Back} alt="Voltar a tela" />
       </BackArrow>
-      <input value={infoUser.name} disabled="false" />
-      <input value={infoUser.cpf} disabled="false" />
-      <input value={infoUser.email} disabled="false" />
+      <input value={saveDataUser.name} disabled="false" />
+      <input value={saveDataUser.cpf} disabled="false" />
+      <input value={saveDataUser.email} disabled="false" />
       <button onClick={() => navigate(`/users/${infoUser.id}/update`)}>
         ATUALIZAR
       </button>
@@ -37,6 +39,11 @@ const ContainerUsers = styled.div`
     margin-top: 10px;
     border-radius: 5px;
     background-color: white;
+
+    :disabled{
+      background-color: darkgray;
+      cursor: not-allowed; 
+    }
   }
 
   button {
