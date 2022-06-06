@@ -43,6 +43,7 @@ export default function LoginPage() {
           "Usuario ou senha invalidos, por favor tente novamente, se não tiver cadastro crie um agora mesmo."
         );
         setLoading(false);
+        setSending(false);
       });
       // promise.finally(setLoading(false)); // Quando terminar qualquer processo setar o loading como false novamente.
     } else alert("Por favor entre com seus dados para logar");

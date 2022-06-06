@@ -17,7 +17,8 @@ export default function UsersPage() {
   const [cpf, setCPF] = useState("");
   const [name, setName] = useState("");
 
-  function sendAlterationsToApi() {
+  function sendAlterationsToApi(event) {
+    event.preventDefault();
     const decision = window.confirm(
       "Tem certeza que deseja atualizar o seu cadastro? Você terá que logar no aplicativo novamente!"
     );
@@ -46,18 +47,23 @@ export default function UsersPage() {
           userAlterations,
           config
         );
-  
+
         promise.then((response) => {
           addInfoOnUser(response.data);
-          console.log(response.data)
+          console.log(response.data);
           alert("Login alterado com sucesso");
           navigate("/");
         });
         promise.catch((error) => {
-          alert("Houve um erro no procedimento, tente novamente mais tarde ",error);
+          alert(
+            "Houve um erro no procedimento, tente novamente mais tarde ",
+            error
+          );
         });
-      } else alert("Por favor entre com todos os dados acima para mudar o seu cadastro...");
-   
+      } else
+        alert(
+          "Por favor entre com todos os dados acima para mudar o seu cadastro..."
+        );
     }
   }
 
@@ -70,36 +76,34 @@ export default function UsersPage() {
           alt="Voltar a tela"
         />
       </BackArrow>
-      <input
-        onChange={(e) => setName(e.target.value)}
-        placeholder={saveDataUser.name}
-      />
-      <input
-        type="number"
-        onChange={(e) => setCPF(e.target.value)}
-        placeholder={saveDataUser.cpf}
-      />
-      <input
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder={saveDataUser.email}
-      />
-      <input
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Senha Atual"
-      />
-      <input
-        type="password"
-        onChange={(e) => setNewPassword(e.target.value)}
-        placeholder="Nova Senha"
-      />
-      <button
-        onClick={() => {
-          sendAlterationsToApi();
-        }}
-      >
-        SALVAR
-      </button>
+      <form onSubmit={(event) => {
+          sendAlterationsToApi(event);
+        }}>
+        <input
+          onChange={(e) => setName(e.target.value)}
+          placeholder={saveDataUser.name}
+        />
+        <input
+          type="number"
+          onChange={(e) => setCPF(e.target.value)}
+          placeholder={saveDataUser.cpf}
+        />
+        <input
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={saveDataUser.email}
+        />
+        <input
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Senha Atual"
+        />
+        <input
+          type="password"
+          onChange={(e) => setNewPassword(e.target.value)}
+          placeholder="Nova Senha"
+        />
+        <button>SALVAR</button>
+      </form>
     </ContainerUsers>
   );
 }
@@ -110,7 +114,7 @@ const ContainerUsers = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
+
   input {
     padding: 1rem;
     width: 90%;
