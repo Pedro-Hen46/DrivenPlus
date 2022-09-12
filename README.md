@@ -29,7 +29,6 @@ Algumas tecnologias usadas:
 <div>
         <img src="./public/images/PaymentPlan.png" width="300px" height="auto">
         <img src="./public/images/Confirm.png" width="300px" height="auto">
-        <h4><strong>Obs:</strong> Tela de Login | Tela de Cadastro</h4>
 </div><br />
 
 
