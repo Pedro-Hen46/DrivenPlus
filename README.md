@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+<img src="./public/images/Apresentation.gif">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sistema de Assinatura DrivenPlus.
 
-## Available Scripts
+## Tecnologias 
+Algumas tecnologias usadas:
 
-In the project directory, you can run:
+* ReactJS
+* React Router dom, Styled Components, Axios...
 
-### `npm start`
+## Serviços
+* Github
+* Vercel
+  
+## Como usar?
+### 1 - Quando você acessa, essa é a Tela Inicial.
+<div>
+        <img src="./public/images/LoginPage.png" width="300px" height="auto">
+        <img src="./public/images/RegisterPage.png" width="300px" height="auto">
+        <h4><strong>Obs:</strong> Tela de Login | Tela de Cadastro</h4>
+</div><br />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 2 - Logando na plataforma, ao iniciar será necessario escolher um plano.
+<div>
+<img src="./public/images/SubscriptionSelect.png"  width="300px" height="auto">
+</div><br />
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 3 - Adicione os dados de pagamento e confirme a escolha.
+<div>
+        <img src="./public/images/PaymentPlan.png" width="300px" height="auto">
+        <img src="./public/images/Confirm.png" width="300px" height="auto">
+        <h4><strong>Obs:</strong> Tela de Login | Tela de Cadastro</h4>
+</div><br />
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 4 - Obtenha acesso a informações exclusivas do seu pacote. ❤
+<img src="./public/images/InfoPlan.png" width="300px" height="auto">
 
-### `npm run build`
+## Recursos
+  - Layout Mobile 📱
+  - Criar uma conta na Plataforma ✨
+  - Mudar Plano de Assinatura 📟
+  - Cancelar o Plano ❌
+  - Alterar dados do Usuário ♻️
+  
+## Links
+  - Deploy Vercel: ***https://driven-plus-mu.vercel.app/***
+  - Repositório: ***https://github.com/Pedro-Hen46/DrivenPlus***
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  ## Autores
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  * **Pedro Henrique dos Santos Silva** 
+  
+  <br />
+  
+  Me siga no [**Github**](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2FPedro-Hen46) e Faça uma conexão no [**LinkedIn**](https://www.linkedin.com/in/pedro-henrique-dos-santos-silva-05012289) ❤
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  Obrigado por visitar. 
